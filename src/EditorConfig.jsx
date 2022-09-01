@@ -8,7 +8,7 @@ import MimeType from "./mime-types.json";
 
 const ffmpeg = createFFmpeg({ log: true });
 
-const supportedFileTypes = ["mp4", "avi"];
+const supportedFileTypes = ["mp4", "avi", "mov", "3gp", "mkv", "flv"];
 
 const EditorConfig = ({ inputFile }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,6 +19,7 @@ const EditorConfig = ({ inputFile }) => {
 
   const loadFfmpeg = async () => {
     await ffmpeg.load();
+    console.log(ffmpeg.run("-formats"));
     setIsLoaded(true);
   };
 
@@ -62,9 +63,7 @@ const EditorConfig = ({ inputFile }) => {
     );
     const data = ffmpeg.FS("readFile", outputFileName);
     setConvertedFileName(outputFileName);
-    const url = URL.createObjectURL(
-      new Blob([data.buffer], { type: MimeType[outputFileType] })
-    );
+    const url = URL.createObjectURL(new Blob([data.buffer]));
     setConvertedFileUrl(url);
     setIsConverting(false);
   };
