@@ -5,7 +5,7 @@ const Navbar = ({ children }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "black",
+        backgroundColor: "var(--joy-palette-primary-900)",
         height: "3rem",
         display: "flex",
         alignItems: "center",
@@ -13,7 +13,7 @@ const Navbar = ({ children }) => {
       }}
     >
       <Typography textColor="white" fontWeight="lg" fontSize="xl">
-        Vobble
+        VOBBLE
       </Typography>
     </Box>
   );
