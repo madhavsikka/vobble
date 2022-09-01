@@ -24,7 +24,7 @@ const Editor = () => {
           alignItems: "center",
         }}
       >
-        {inputFileUrl && <video controls src={inputFileUrl} />}
+        {/* {inputFileUrl && <video controls src={inputFileUrl} />} */}
 
         <FileButton
           title="Select File"
