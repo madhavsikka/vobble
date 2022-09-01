@@ -4,11 +4,17 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Button from "@mui/joy/Button";
 import Box from "@mui/material/Box";
-import MimeType from "./mime-types.json";
 
 const ffmpeg = createFFmpeg({ log: true });
 
-const supportedFileTypes = ["mp4", "avi", "mov", "3gp", "mkv", "flv"];
+const supportedFileTypes = ["mp4", "avi", "mov", "mkv", "flv"];
+const FILE_TYPE_TO_FORMAT_MAP = {
+  mp4: "mp4",
+  avi: "avi",
+  mov: "mov",
+  flv: "flv",
+  mkv: "matroska",
+};
 
 const EditorConfig = ({ inputFile }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,7 +25,6 @@ const EditorConfig = ({ inputFile }) => {
 
   const loadFfmpeg = async () => {
     await ffmpeg.load();
-    console.log(ffmpeg.run("-formats"));
     setIsLoaded(true);
   };
 
@@ -40,7 +45,6 @@ const EditorConfig = ({ inputFile }) => {
     const splitFileName = inputFile?.name.split(".");
     const fileExtension =
       splitFileName?.[splitFileName.length - 1].toLowerCase();
-    console.log(splitFileName, fileExtension);
     if (
       !splitFileName ||
       splitFileName.length <= 1 ||
@@ -58,7 +62,7 @@ const EditorConfig = ({ inputFile }) => {
       "-i",
       inputFile.name,
       "-f",
-      outputFileType,
+      FILE_TYPE_TO_FORMAT_MAP[outputFileType],
       outputFileName
     );
     const data = ffmpeg.FS("readFile", outputFileName);
