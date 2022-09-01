@@ -7,11 +7,11 @@ import EditorConfig from "./EditorConfig";
 const Editor = () => {
   const [inputFile, setInputFile] = useState();
   const [inputFileUrl, setInputFileUrl] = useState();
-  const [convertedFile, setConvertedFile] = useState();
 
   useEffect(() => {
     if (inputFileUrl) window.URL.revokeObjectURL(inputFileUrl);
     if (inputFile) setInputFileUrl(URL.createObjectURL(inputFile));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputFile]);
 
   return (
@@ -34,10 +34,7 @@ const Editor = () => {
           }}
         />
 
-        <EditorConfig
-          inputFile={inputFile}
-          onFileConverted={(file) => setConvertedFile(file)}
-        />
+        <EditorConfig inputFile={inputFile} />
       </Box>
     </>
   );

@@ -10,7 +10,7 @@ const ffmpeg = createFFmpeg({ log: true });
 
 const supportedFileTypes = ["mp4", "avi"];
 
-const EditorConfig = ({ inputFile, onFileConverted }) => {
+const EditorConfig = ({ inputFile }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [outputFileType, setOutputFileType] = useState();
   const [isConverting, setIsConverting] = useState(false);
@@ -31,6 +31,7 @@ const EditorConfig = ({ inputFile, onFileConverted }) => {
     setConvertedFileUrl();
     setConvertedFileName();
     window.URL.revokeObjectURL(convertedFileUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputFile]);
 
   const convertFile = async () => {
