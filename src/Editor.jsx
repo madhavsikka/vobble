@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Navbar from "./Navbar";
 import FileButton from "./FileButton";
 import EditorConfig from "./EditorConfig";
+import InputFileCard from "./InputFileCard";
 
 const Editor = () => {
   const [inputFile, setInputFile] = useState();
@@ -24,7 +25,9 @@ const Editor = () => {
           alignItems: "center",
         }}
       >
-        {/* {inputFileUrl && <video controls src={inputFileUrl} />} */}
+        {inputFile && (
+          <InputFileCard inputFile={inputFile} inputFileUrl={inputFileUrl} />
+        )}
 
         <FileButton
           title="Select File"
