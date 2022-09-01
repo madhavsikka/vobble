@@ -8,13 +8,6 @@ import Box from "@mui/material/Box";
 const ffmpeg = createFFmpeg({ log: true });
 
 const supportedFileTypes = ["mp4", "avi", "mov", "mkv", "flv"];
-const FILE_TYPE_TO_FORMAT_MAP = {
-  mp4: "mp4",
-  avi: "avi",
-  mov: "mov",
-  flv: "flv",
-  mkv: "matroska",
-};
 
 const EditorConfig = ({ inputFile }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -58,13 +51,7 @@ const EditorConfig = ({ inputFile }) => {
       "." +
       outputFileType;
     ffmpeg.FS("writeFile", inputFile.name, await fetchFile(inputFile));
-    await ffmpeg.run(
-      "-i",
-      inputFile.name,
-      "-f",
-      FILE_TYPE_TO_FORMAT_MAP[outputFileType],
-      outputFileName
-    );
+    await ffmpeg.run("-i", inputFile.name, outputFileName);
     const data = ffmpeg.FS("readFile", outputFileName);
     setConvertedFileName(outputFileName);
     const url = URL.createObjectURL(new Blob([data.buffer]));
