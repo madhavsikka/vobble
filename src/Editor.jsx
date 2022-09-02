@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import FileButton from "./FileButton";
 import EditorConfig from "./EditorConfig";
 import InputFileCard from "./InputFileCard";
+import { Grid } from "@mui/joy";
+import { Flex } from "@chakra-ui/react";
 
 const Editor = () => {
   const [inputFile, setInputFile] = useState();
@@ -16,30 +18,31 @@ const Editor = () => {
   }, [inputFile]);
 
   return (
-    <>
+    <Box>
       <Navbar />
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "40px",
         }}
       >
-        {inputFile && (
-          <InputFileCard inputFile={inputFile} inputFileUrl={inputFileUrl} />
-        )}
+        <Box>
+          <FileButton
+            title="Select File"
+            onFileSelect={(file) => setInputFile(file)}
+          />
 
-        <FileButton
-          title="Select File"
-          onFileSelect={(file) => setInputFile(file)}
-          sx={{
-            margin: "20px",
-          }}
-        />
+          <EditorConfig inputFile={inputFile} />
+        </Box>
 
-        <EditorConfig inputFile={inputFile} />
+        <Box>
+          {inputFile && (
+            <InputFileCard inputFile={inputFile} inputFileUrl={inputFileUrl} />
+          )}
+        </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

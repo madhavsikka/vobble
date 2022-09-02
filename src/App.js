@@ -1,14 +1,14 @@
-import "./App.css";
 import Editor from "./Editor";
 
 import { CssVarsProvider } from "@mui/joy/styles";
+import { Box } from "@mui/joy";
 
 function App() {
   return (
     <CssVarsProvider>
-      <div className="App">
+      <Box>
         <Editor />
-      </div>
+      </Box>
     </CssVarsProvider>
   );
 }
